@@ -1,10 +1,10 @@
-%bcond_without bootstrap
+%bcond_with bootstrap
 %global packname  spatstat
 %global rlibdir  %{_libdir}/R/library
 
 Name:             R-%{packname}
 Version:          1.25_3
-Release:          1
+Release:          2
 Summary:          Spatial Point Pattern analysis, model-fitting, simulation, tests
 Group:            Sciences/Mathematics
 License:          GPL (>= 2)
@@ -12,16 +12,22 @@ URL:              http://cran.r-project.org/web/packages/%{packname}/index.html
 Source0:          http://cran.r-project.org/src/contrib/%{packname}_1.25-3.tar.gz
 Requires:         R-stats R-graphics R-utils R-mgcv R-deldir 
 %if %{with bootstrap}
-Requires:         R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields 
+Requires:         R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d
+Requires:         R-RandomFields
 %else
-Requires:         R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields 
+Requires:         R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot
+Requires:         R-scatterplot3d R-RandomFields
 %endif
-BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-stats R-graphics R-utils R-mgcv R-deldir
+BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-stats
+BuildRequires:    R-graphics R-utils R-mgcv R-deldir
 %if %{with bootstrap}
-BuildRequires:    R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields 
+BuildRequires:    R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d
+BuildRequires:    R-RandomFields
 %else
-BuildRequires:    R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields 
+BuildRequires:    R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot
+BuildRequires:    R-scatterplot3d R-RandomFields
 %endif
+BuildRequires:    x11-server-xvfb
 
 %description
 A package for analysing spatial data, mainly Spatial Point Patterns,
@@ -57,7 +63,7 @@ rm -f %{buildroot}%{rlibdir}/R.css
 
 %if %{without bootstrap}
 %check
-%{_bindir}/R CMD check %{packname}
+xvfb-run %{_bindir}/R CMD check %{packname}
 %endif
 
 %files
