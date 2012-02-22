@@ -10,22 +10,16 @@ Group:            Sciences/Mathematics
 License:          GPL (>= 2)
 URL:              http://cran.r-project.org/web/packages/%{packname}/index.html
 Source0:          http://cran.r-project.org/src/contrib/%{packname}_1.25-3.tar.gz
-Requires:         R-stats R-graphics R-utils R-mgcv R-deldir 
-%if %{with bootstrap}
-Requires:         R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d
-Requires:         R-RandomFields
-%else
-Requires:         R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot
-Requires:         R-scatterplot3d R-RandomFields
+Requires:         R-stats R-graphics R-utils R-mgcv R-deldir R-gpclib R-sm
+Requires:         R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields
+%if %{without bootstrap}
+Requires:         R-maptools
 %endif
-BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-stats
-BuildRequires:    R-graphics R-utils R-mgcv R-deldir
-%if %{with bootstrap}
-BuildRequires:    R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d
-BuildRequires:    R-RandomFields
-%else
-BuildRequires:    R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot
-BuildRequires:    R-scatterplot3d R-RandomFields
+BuildRequires:    R-devel Rmath-devel texlive-collection-latex
+BuildRequires:    R-stats R-graphics R-utils R-mgcv R-deldir R-gpclib R-sm
+BuildRequires:    R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields
+%if %{without bootstrap}
+BuildRequires:    R-maptools
 %endif
 BuildRequires:    x11-server-xvfb
 
