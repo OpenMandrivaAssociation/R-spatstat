@@ -3,23 +3,31 @@
 %global rlibdir  %{_libdir}/R/library
 
 Name:             R-%{packname}
-Version:          1.25_3
-Release:          3
+Version:          1.31.0
+Release:          1
 Summary:          Spatial Point Pattern analysis, model-fitting, simulation, tests
 Group:            Sciences/Mathematics
 License:          GPL (>= 2)
 URL:              http://cran.r-project.org/web/packages/%{packname}/index.html
-Source0:          http://cran.r-project.org/src/contrib/%{packname}_1.25-3.tar.gz
-Requires:         R-stats R-graphics R-utils R-mgcv R-deldir R-gpclib R-sm
-Requires:         R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields
-%if %{without bootstrap}
-Requires:         R-maptools
+Source0:          http://cran.r-project.org/src/contrib/spatstat_1.31-0.tar.gz
+Requires:         R-stats R-graphics R-utils R-mgcv R-deldir 
+Requires:         R-gsl
+%if %{with bootstrap}
+Requires:         R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d
+Requires:         R-RandomFields
+%else
+Requires:         R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot
+Requires:         R-scatterplot3d R-RandomFields
 %endif
-BuildRequires:    R-devel Rmath-devel texlive-collection-latex
-BuildRequires:    R-stats R-graphics R-utils R-mgcv R-deldir R-gpclib R-sm
-BuildRequires:    R-spatial R-rpanel R-tkrplot R-scatterplot3d R-RandomFields
-%if %{without bootstrap}
-BuildRequires:    R-maptools
+BuildRequires:    R-devel Rmath-devel texlive-collection-latex R-stats
+BuildRequires:    R-graphics R-utils R-mgcv R-deldir
+BuildRequires:    R-gsl
+%if %{with bootstrap}
+BuildRequires:    R-gpclib R-sm R-spatial R-rpanel R-tkrplot R-scatterplot3d
+BuildRequires:    R-RandomFields
+%else
+BuildRequires:    R-gpclib R-sm R-maptools R-spatial R-rpanel R-tkrplot
+BuildRequires:    R-scatterplot3d R-RandomFields
 %endif
 BuildRequires:    x11-server-xvfb
 
@@ -76,3 +84,16 @@ xvfb-run %{_bindir}/R CMD check %{packname}
 %{rlibdir}/%{packname}/help
 %{rlibdir}/%{packname}/libs
 %{rlibdir}/%{packname}/ratfor
+
+
+%changelog
+* Tue Feb 21 2012 Paulo Andrade <pcpa@mandriva.com.br> 1.25_3-2
++ Revision: 778369
+- Rebuild with proper dependencies
+
+* Sat Feb 18 2012 Paulo Andrade <pcpa@mandriva.com.br> 1.25_3-1
++ Revision: 776910
+- Import R-spatstat
+- Import R-spatstat
+
+
