@@ -8,7 +8,7 @@ Release:          1
 Summary:          Spatial Point Pattern analysis, model-fitting, simulation, tests
 Group:            Sciences/Mathematics
 License:          GPL (>= 2)
-URL:              http://cran.r-project.org/web/packages/%{packname}/index.html
+URL:              https://cran.r-project.org/web/packages/%{packname}/index.html
 Source0:          http://cran.r-project.org/src/contrib/spatstat_1.31-0.tar.gz
 Requires:         R-stats R-graphics R-utils R-mgcv R-deldir 
 Requires:         R-gsl
